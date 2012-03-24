@@ -25,7 +25,7 @@ class Search
   def self.find(parameters, attendees)
     
     attribute = parameters[0]
-    criteria = parameters[1..-1].to_s.join(" ")
+    criteria = parameters[1..-1].join(" ")
     Queue.new
 
     EventDataParser.attendees.each do |attendee|

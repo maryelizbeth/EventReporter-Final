@@ -69,7 +69,7 @@ class Queue
     elsif  parameters.count==2||(parameters[0]=="print" && parameters[1]=="by")
       puts ["LAST NAME".ljust(16), "FIRST NAME".ljust(20), "EMAIL".ljust(40), "ZIPCODE".ljust(20), 
             "CITY".ljust(24), "STATE".ljust(20), "ADDRESS"].join("\t")
-      attribute = (parameters[2]).to_sym
+      attribute = (parameters[2])
       sort = @@queue.sort_by{|line| line.send(attribute)}
         sort.each do |line|
           puts "#{line.last_name}".capitalize.ljust(16) +
@@ -83,18 +83,18 @@ class Queue
       
 
     elsif parameters[0] == "save"
-      parameters[1] == "to" && parameters.count == 3 
+      parameters[1] == "to" && parameters.count == 2
       output = CSV.open(parameters[2], "w") do |output|
         output << ["last_name", "first_name", "email", "zipcode",
-                   "city", "state", "street"]
+                   "city", "state", "street"].join(",") + "\n"
         @@queue.each do |line|
           output << [" ", line.regdate, line.first_name, line.last_name,
           line.email, line.homephone, line.street, line.city,
           line.state, line.zipcode].join(",") + "\n"
         end
       end
-      puts "Saving your queue"
       output.close
+      puts "Saving your CSV as #{parameters[2]}"
     else 
       return self
     end 
