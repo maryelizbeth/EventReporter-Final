@@ -1,4 +1,4 @@
-
+require 'cane'
   class Attendee
     # takes a CSV Row
     # assigns to appropriate instance variables

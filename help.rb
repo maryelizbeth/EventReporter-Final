@@ -17,7 +17,7 @@ class Help
 
     elsif parameters.count >= 1 
       if ALL_COMMANDS.fetch(parameters) { |key| "#{value}"}  
-
+        return true
      else 
       return self   
      end

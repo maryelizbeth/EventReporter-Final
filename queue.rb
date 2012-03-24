@@ -5,7 +5,7 @@ require 'csv'
 # require './EventReporterCLI'
 
 #Class Definition
-class Queue < Array
+class Queue 
   attr_accessor :queue
 
   def initialize
@@ -24,7 +24,7 @@ class Queue < Array
 
 
   def self.call(parameters)
-   puts "Completed queue sub-function #{parameters[0]}"
+   return true
   end
 
   def self.valid_parameters_for_queue?(parameters, queue)
