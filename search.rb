@@ -14,24 +14,18 @@ class Search
   #    puts @queue.size
   #   #in 'event_attendees.csv'
   # end
+  
 
   def self.valid_parameters?(parameters)
     #Check that attribute is valid 
-    parameters.join(" ")
+    parameters.count >= 2
 
-    if parameters.count == 2 
-      puts "Searching for #{parameters}"
-      return true
-    elsif parameters.count >= 2 
-      parameters[1..-1].to_s.join(" ")
-      puts "Searching for #{parameters}"
-    end
   end 
 
   def self.find(parameters, attendees)
     
     attribute = parameters[0]
-    criteria = parameters[1..-1].join " "
+    criteria = parameters[1..-1].to_s.join(" ")
     Queue.new
 
     EventDataParser.attendees.each do |attendee|
@@ -40,7 +34,7 @@ class Search
       end
     end
 
-    puts "There are #{Queue.queue.count} results in the queue." 
+    puts "This search has added #{Queue.queue.count} results to the queue." 
     return Queue.queue
   end
 end 
