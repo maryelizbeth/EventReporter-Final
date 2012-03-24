@@ -47,14 +47,10 @@ class EventReporterCLI
 
   def self.switch_by_command(command,parameters)
     if command == "load" 
-      puts "Loading your data."
       if EventDataParser.valid_parameters_for_load?(parameters)
         attendees = EventDataParser.load(parameters.first)
-
-      # elsif !EventDataParser.valid_parameters_for_load?(parameters)
-      # attendees = EventDataParser.load_default(parameters)
-      # puts "No filename given. event_attendees.csv has been loaded"
-
+        puts "Loading your data"
+      return true
       else
         puts "Sorry, the specified filename was not found." 
       end 
@@ -62,6 +58,7 @@ class EventReporterCLI
     elsif command == "queue"
       if Queue.valid_parameters_for_queue?(parameters, command)
         Queue.call(parameters)
+        return true
       else
         puts "Sorry, you specified an invalid command for 'queue'."
       end 
@@ -69,6 +66,7 @@ class EventReporterCLI
     elsif command == "help"
       if Help.valid_parameters_for_help?(parameters)
         Help.for(parameters)
+        return true
       else 
         puts "Sorry, you specified an invalid command for 'help'."
       end 
@@ -76,6 +74,7 @@ class EventReporterCLI
     elsif command == "find"
       if Search.valid_parameters?(parameters)
          Search.find(parameters, attendees)
+         return true
       else
         puts "Sorry, you specified an invalid command for 'find'." 
       end 
@@ -99,7 +98,7 @@ class EventReporterCLI
       if inputs.any? 
         command, parameters = parse_user_input(inputs)
         switch_by_command(command, parameters)
-
+        
       elsif inputs != ALL_COMMANDS.include?(command)
         puts "Sorry, you specified an invalid command."
         puts "Please enter 'help' for a list of available commands."

@@ -24,7 +24,7 @@ class Queue < Array
 
 
   def self.call(parameters)
-    "Running queue sub-function #{parameters[0]}"
+   puts "Completed queue sub-function #{parameters[0]}"
   end
 
   def self.valid_parameters_for_queue?(parameters, queue)
@@ -34,13 +34,16 @@ class Queue < Array
     elsif parameters [0] == "count"
       @@queue.count 
       puts "There are #{Queue.queue.count} items in the queue"
+      return true
 
     elsif parameters [0] == "clear"
-      puts "The queue has been cleared." 
       if @@queue != []
          @@queue = []
-      else
-        puts "There are 0 items in the queue."
+      puts "The queue has been cleared."
+      return true
+      elsif @@queue == []
+        puts "The queue was empty. Unable to clear empty queue."
+        return true
       end
       
     elsif parameters[0] == "print"  
@@ -69,7 +72,7 @@ class Queue < Array
             "CITY", "STATE", "ADDRESS"].join("\t")
 
       keys = parameters[2]
-      @@queue = @@queue.sort_by{|attendee| attendee.send(keys.to_sym)} 
+      @@queue = @@queue.sort! {|attribute| attendee.send(attribute.to_sym)} 
       @@queue.each do |line|
       @@queue << line.to_s
     
