@@ -18,9 +18,13 @@ class Search
   def self.valid_parameters?(parameters)
     #Check that attribute is valid 
     parameters.join(" ")
-    if parameters.count == 2
+
+    if parameters.count == 2 
       puts "Searching for #{parameters}"
       return true
+    elsif parameters.count >= 2 
+      parameters[1..-1].to_s.join(" ")
+      puts "Searching for #{parameters}"
     end
   end 
 

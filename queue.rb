@@ -71,19 +71,18 @@ class Queue
       puts ["LAST NAME", "FIRST NAME", "EMAIL", "ZIPCODE", 
             "CITY", "STATE", "ADDRESS"].join("\t")
 
-      keys = parameters[2]
+      attribute = parameters[2]
       @@queue = @@queue.sort! {|attribute| attendee.send(attribute.to_sym)} 
-      @@queue.each do |line|
-      @@queue << line.to_s
+        @@queue.each do |line|
     
-      puts "#{line.last_name}".capitalize.ljust(16) +
-      "#{line.first_name}".capitalize.ljust(20) +
-      "#{line.email}".capitalize.ljust(40) +
-      "#{line.zipcode}".capitalize.ljust(20) +
-      "#{line.city}".capitalize.ljust(24)+ 
-      "#{line.state}".upcase.ljust(20) + 
-      "#{line.street}\n"   
-      end 
+        puts "#{line.last_name}".capitalize.ljust(16) +
+        "#{line.first_name}".capitalize.ljust(20) +
+        "#{line.email}".capitalize.ljust(40) +
+        "#{line.zipcode}".capitalize.ljust(20) +
+        "#{line.city}".capitalize.ljust(24)+ 
+        "#{line.state}".upcase.ljust(20) + 
+        "#{line.street}\n"   
+        end 
 
     elsif parameters[0] == "save"
       parameters[1] == "to" && parameters.count == 3 
