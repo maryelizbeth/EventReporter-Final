@@ -67,8 +67,8 @@ class Queue
     end   
 
     elsif  parameters.count==2||(parameters[0]=="print" && parameters[1]=="by")
-      puts ["LAST NAME", "FIRST NAME", "EMAIL", "ZIPCODE", 
-            "CITY", "STATE", "ADDRESS"].join("\t")
+      puts ["LAST NAME".ljust(16), "FIRST NAME".ljust(20), "EMAIL".ljust(40), "ZIPCODE".ljust(20), 
+            "CITY".ljust(24), "STATE".ljust(20), "ADDRESS"].join("\t")
       attribute = (parameters[2]).to_sym
       sort = @@queue.sort_by{|line| line.send(attribute)}
         sort.each do |line|
@@ -94,6 +94,7 @@ class Queue
         end
       end
       puts "Saving your queue"
+      output.close
     else 
       return self
     end 
