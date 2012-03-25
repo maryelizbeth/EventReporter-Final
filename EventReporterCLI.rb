@@ -47,19 +47,17 @@ class EventReporterCLI
   end 
 
   def self.switch_by_command(command,parameters)
-    if command == "load"
-      if EventDataParser.valid_parameters_for_load?(parameters)
-        attendees = EventDataParser.load(parameters.first)
-        puts "Loading your data."
-      return true
-      # elsif command == "load"
-      #   if EventDataParser.valid_parameters_for_load?(parameters)
-      #     @attendees = EventDataParser.load_default_file(parameters)
-      #     puts "No filename given. Default file has been loaded."
-      #   return true
-      #   end
+    if command == "load" && EventDataParser.valid_parameters_for_load?(parameters)
+        attendees = EventDataParser.load(parameters[0])
+        puts "Loading your data from #{parameters[0]}."
+
+    elsif command == "load"
+      if !EventDataParser.valid_parameters_for_load?(parameters)
+        @attendees = EventDataParser.load_default(parameters)
+        puts "No filename given. Default file has been loaded."
       else
         puts "Sorry, the specified filename was not found." 
+        return self
       end 
 
 

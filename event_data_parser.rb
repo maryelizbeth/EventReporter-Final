@@ -32,17 +32,18 @@ class EventDataParser
       end
     end
 
-    def self.load(filename, options = CSV_OPTIONS)
-        load_attendees(CSV.open(filename, CSV_OPTIONS)) || load_default(CSV.open(filename, CSV_OPTIONS))
+    def self.load(filename)
+      @file = CSV.open(filename, CSV_OPTIONS)
+      @attendees = @file.collect {|line| Attendee.new(line)}
     end 
 
     def self.load_attendees(file)
       @attendees = file.collect {|line| Attendee.new(line)}
     end 
 
-    def self.load_default(file)
+    def self.load_default(filename)
       @file = CSV.open("event_attendees.csv", CSV_OPTIONS)
-      @attendees = file.collect {|line| Attendee.new(line)}
+      @attendees = @file.collect {|line| Attendee.new(line)}
     end 
  end
 
