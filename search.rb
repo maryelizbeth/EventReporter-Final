@@ -29,8 +29,10 @@ class Search
     Queue.new
 
     EventDataParser.attendees.each do |attendee|
-      if attendee.send(attribute.to_sym).downcase == criteria.downcase
-        Queue.queue << attendee
+      if !attendee.send(attribute.to_sym).nil? 
+        if attendee.send(attribute.to_sym).downcase == criteria.downcase
+          Queue.queue << attendee
+        end
       end
     end
 
