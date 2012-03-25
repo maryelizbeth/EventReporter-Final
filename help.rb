@@ -13,14 +13,12 @@ class Help
   def self.for(parameters)
     if parameters.count == 0
       puts "Please select a command from below:\n"
-      ALL_COMMANDS.each{|key, value| puts "#{key}"}
+      puts ALL_COMMANDS.keys.join("\n")
 
-    elsif parameters.count >= 1 
-      if ALL_COMMANDS.fetch(parameters) { |key| "#{value}"}  
-        return true
-     else 
-      return self   
-     end
+    else
+        puts "Here is information about the command you entered: "
+        parameters = parameters.join(" ")
+        puts ALL_COMMANDS[parameters]
     end
   end
 
