@@ -22,7 +22,7 @@ class Help
     end
   end
 
-  def self.valid_parameters_for_help?(parameters)       
-    parameters.empty?||EventReporterCLI.valid_command?(parameters.join(" "))   
-  end   
+  def self.valid_parameters_for_help?(parameters)
+    parameters.empty?||EventReporterCLI.valid_command?(parameters.join(" "))
+  end
 end

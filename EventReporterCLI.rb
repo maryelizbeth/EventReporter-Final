@@ -34,6 +34,7 @@ class EventReporterCLI
 
   def initialize 
     @queue = Queue.queue.new
+    @attendees = []
   end 
 
 
@@ -46,14 +47,21 @@ class EventReporterCLI
   end 
 
   def self.switch_by_command(command,parameters)
-    if command == "load" 
+    if command == "load"
       if EventDataParser.valid_parameters_for_load?(parameters)
         attendees = EventDataParser.load(parameters.first)
-        puts "Loading your data"
+        puts "Loading your data."
       return true
+      # elsif command == "load"
+      #   if EventDataParser.valid_parameters_for_load?(parameters)
+      #     @attendees = EventDataParser.load_default_file(parameters)
+      #     puts "No filename given. Default file has been loaded."
+      #   return true
+      #   end
       else
         puts "Sorry, the specified filename was not found." 
       end 
+
 
     elsif command == "queue"
       if Queue.valid_parameters_for_queue?(parameters, command)
