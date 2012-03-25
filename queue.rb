@@ -83,20 +83,20 @@ class Queue
       
 
     elsif parameters[0] == "save"
-      parameters[1] == "to" && parameters.count == 2
-      output = CSV.open(parameters[2], "w") do |output|
-        output << ["last_name", "first_name", "email", "zipcode",
-                   "city", "state", "street"].join(",") + "\n"
+      output = File.open(parameters[2], "w") do |output|
+        output << [" ", "RegDate" "last_name", "first_Name", "email", "zipcode",
+                   "city", "HomePhone", "state", "street"].join(",") + "\n"
         @@queue.each do |line|
           output << [" ", line.regdate, line.first_name, line.last_name,
           line.email, line.homephone, line.street, line.city,
           line.state, line.zipcode].join(",") + "\n"
         end
+        output.close
+        puts "Saving your CSV as #{parameters[2]}"
+        return true
       end
-      output.close
-      puts "Saving your CSV as #{parameters[2]}"
     else 
-      return self
+      return false
     end 
   end 
 end 
